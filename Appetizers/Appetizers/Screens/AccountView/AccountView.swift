@@ -9,41 +9,43 @@ import SwiftUI
 
 struct AccountView: View {
     
-    @State var firstName = ""
-    @State var lastName = ""
-    @State var email = ""
-    @State var birthday = Date()
-    @State private var extraNapkins = false
-    @State private var requentRefills = false
+    @StateObject var viewModel = AccountViewModel()
     
     var body: some View {
         NavigationView{
             Form {
                 Section(header: Text("Personal Info")) {
-                    TextField("Fierst Name", text: $firstName)
-                    TextField("Last Name", text: $lastName)
-                    TextField("Email", text: $email)
+                    TextField("Fierst Name", text: $viewModel.firstName)
+                    TextField("Last Name", text: $viewModel.lastName)
+                    TextField("Email", text: $viewModel.email)
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
-                    DatePicker("Birthday", selection: $birthday, displayedComponents: .date)
+                    DatePicker("Birthday", selection: $viewModel.birthday, displayedComponents: .date)
                     
                     Button {
-                        print("Save")
+                        viewModel.saveChanges()
                     } label: {
                         Text("Save Changes")
                     }
                 }
                 
                 Section(header: Text("Requeats")) {
-                    Toggle("Extra Napkins", isOn: $extraNapkins)
+                    Toggle("Extra Napkins", isOn: $viewModel.extraNapkins)
                         //.tint(.brandPrimary)
-                    Toggle("Freqent Refills", isOn: $requentRefills)
+                    Toggle("Freqent Refills", isOn: $viewModel.requentRefills)
                         //.tint(.brandPrimary)
                 }
                 .toggleStyle(SwitchToggleStyle(tint: .brandPrimary))
             }
             .navigationTitle("🤗 Account")
+        }
+        .alert(item: $viewModel.alertItem) { alertItem in
+            Alert(
+                title: alertItem.title,
+                message: alertItem.message,
+                dismissButton: alertItem.dismissButton
+            )
         }
     }
 }
