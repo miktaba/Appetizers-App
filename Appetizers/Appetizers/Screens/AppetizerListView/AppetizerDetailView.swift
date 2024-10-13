@@ -30,9 +30,9 @@ struct AppetizerDetailView: View {
                     .padding()
                 
                 HStack(spacing: 40) {
-                    NutritionInfo(title: "Calories", value: appetizer.calories)
-                    NutritionInfo(title: "Carbs", value: appetizer.carbs)
-                    NutritionInfo(title: "Protein", value: appetizer.protein)
+                    NutritionInfo(title: "Calories", value: "\(appetizer.calories)" + " kcal")
+                    NutritionInfo(title: "Carbs", value: "\(appetizer.carbs)" + " g")
+                    NutritionInfo(title: "Protein", value: "\(appetizer.protein)" + " g")
                 }
             }
             
@@ -43,8 +43,16 @@ struct AppetizerDetailView: View {
                 isShowingDetail = false
                 //order.items.append(appetizer)
             } label: {
-                APButton(title: "$\(appetizer.price, specifier: "%.2f") - Add to Cart")
+//                APButton(title: "$\(appetizer.price, specifier: "%.2f") - Add to Cart")
+                Text("$\(appetizer.price, specifier: "%.2f") - Add to Cart")
             }
+            //.modifier(StandardButtonStyle())
+            .standardButtonStyle()
+            
+//            .buttonStyle(.bordered)
+//            .tint(.brandPrimary)
+//            .controlSize(.large)
+            
             .padding(.bottom, 30)
             
         }
@@ -66,7 +74,7 @@ struct AppetizerDetailView: View {
 
 struct NutritionInfo: View {
     let title: String
-    let value: Int
+    let value: String
     
     var body: some View {
         VStack(spacing: 5) {
@@ -74,7 +82,7 @@ struct NutritionInfo: View {
                 .bold()
                 .font(.caption)
             
-            Text("\(value)")
+            Text(value)
                 .foregroundStyle(.secondary)
                 .fontWeight(.semibold)
                 .italic()
