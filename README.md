@@ -2,9 +2,11 @@
 Appetizer is a SwiftUI-based application developed from Sean Allen’s course.
 This course facilitated my practice in constructing applications utilizing the SwiftUI framework,
 with a particular emphasis on data transfer between views. <br>
+
 The project also adheres to the MVVM (Model-View-ViewModel) 
 pattern to separate the business data logic from the user interface, 
 thereby enhancing the code’s modularity, testability, and extensibility. <br>
+
 The application embodies fundamental iOS application development principles, including network queries, state management, 
 the creation of custom UI components, and the utilization of contemporary Swift features such as async/await and @AppStorage. <br />
 
